@@ -35,7 +35,7 @@ const access = usePage().props.auth.user.access;
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink v-if="access == 1" :href="route('register')" :active="route().current('register')">
+                                <NavLink v-if="access == 1" :href="route('users')" :active="route().current('users')">
                                     Users
                                 </NavLink>
                             </div>
@@ -121,7 +121,7 @@ const access = usePage().props.auth.user.access;
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink v-if="access == 1" :href="route('register')" :active="route().current('register')">
+                        <ResponsiveNavLink v-if="access == 1" :href="route('users')" :active="route().current('users')">
                             Users
                         </ResponsiveNavLink>
                         

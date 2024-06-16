@@ -24,8 +24,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/users', function () {
-    return Inertia::render('Users/Register');
-})->middleware(['auth', 'verified']);
+    return Inertia::render('Users/Index');
+})->middleware(['auth', 'verified', 'admin'])->name('users');
 
 
 

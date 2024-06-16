@@ -17,17 +17,15 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated and has an 'admin' role
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/')->with('error', 'Authentication is required.');
         }
 
-        
-        if (Auth::check() && Auth::user()->access == '1') {
-            return $next($request);
+        if (Auth::user()->access != '1') {
+            return redirect('/dashboard')->with('error', 'You do not have admin access.');
         }
 
-        // Optionally, redirect to a different page if not authorized
-        return redirect('/dashboard')->with('error', 'You do not have admin access.');
+        return $next($request);
+
     }
 }
