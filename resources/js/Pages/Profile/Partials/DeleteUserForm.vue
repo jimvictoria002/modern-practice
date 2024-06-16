@@ -48,7 +48,7 @@ const closeModal = () => {
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+        <DangerButton @click="confirmUserDeletion" >Delete Account</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
@@ -82,7 +82,7 @@ const closeModal = () => {
 
                     <DangerButton
                         class="ms-3"
-                        :class="{ 'opacity-25': form.processing }"
+                        :class="{ 'relative spinner !text-transparent': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
