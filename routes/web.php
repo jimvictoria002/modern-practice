@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,7 +25,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/users', function () {
-    return Inertia::render('Users/Index');
+
+    // dd(User::all());
+    return inertia('Users/Index', [
+        'users' => User::where('access', '!=' , '1')->get()
+    ]);
 })->middleware(['auth', 'verified', 'admin'])->name('users');
 
 

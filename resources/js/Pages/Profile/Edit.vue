@@ -15,7 +15,7 @@ defineProps({
 });
 
 const access = usePage().props.auth.user.access;
-console.log(access)
+// console.log(access)
 </script>
 
 <template>
