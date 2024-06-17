@@ -15,7 +15,6 @@ defineProps({
 })
 
 const user = usePage().props.user;
-console.log(user)
 
 const form = useForm({
     firstname: user.firstname,
@@ -50,8 +49,8 @@ const submit = () => {
                     <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Edit user here</h2>
 
                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        Please use this form to create a user account. A valid email address is required for
-                        verification to
+                        Please use this form to edit a user account. If a email address is change it is required for
+                        verification again to
                         complete the registration process.
                     </p>
                 </header>

@@ -6,27 +6,17 @@ import DangerButton from '@/Components/DangerButton.vue';
 import { parseISO, format } from 'date-fns';
 import Swal from 'sweetalert2';
 
-defineProps({
+defineProps({ 
     users: {
-        type: Object
+        type: Object,
+        required: true
     }
-});
-
-const formatDate = (dateString) => {
-    const date = parseISO(dateString);
-    return format(date, 'MMMM dd, yyyy | h:mma').replace(/^0/, '');
-}
-
-
+}) 
 
 
 const { props } = usePage();
+
 const successMessage = props.flash.success;
-
-console.log(props.users.data.length)
-console.log(props.users)
-
-
 
 if (successMessage) {
     Swal.fire({
@@ -53,6 +43,7 @@ const confirmDelete = (user_id) => {
         }
     });
 };
+
 const deleteForm = useForm({});
 
 const deleteUser = (user_id) => {
@@ -168,7 +159,7 @@ const deleteUser = (user_id) => {
                                                 <td
                                                     class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
                                                     {{
-                                                        formatDate(user.created_at)
+                                                        user.created_at_formatted
                                                     }}
                                                 </td>
 

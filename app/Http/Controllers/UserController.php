@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,14 +14,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(): Response 
     {
-        return Inertia::render(
-            'Users/Index',
-            [
-                'users' => User::where('access', '!=', '1')->paginate(7)
-            ]
-        );
+
+        return Inertia::render('Users/Index', [
+            'users' => UserResource::collection(User::where('access', '!=', '1')->latest()->paginate(7))
+        ]); 
     }
 
     /**
@@ -62,7 +61,6 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-
 
         // Check if the user email is being changed
         if ($request->validated()['email'] != $user->email) {
