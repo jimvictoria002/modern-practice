@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,14 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/users', function () {
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('users', UserController::class);
 
-    // dd(User::all());
-    return inertia('Users/Index', [
-        'users' => User::where('access', '!=' , '1')->get()
-    ]);
-})->middleware(['auth', 'verified', 'admin'])->name('users');
+});
 
 
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
