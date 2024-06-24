@@ -38,6 +38,10 @@ const access = usePage().props.auth.user.access;
                                 <NavLink v-if="access == 1" :href="route('users.index')" :active="route().current('users.index') || route().current('register') || route().current('users.edit') ">
                                     Users
                                 </NavLink>
+                                
+                                <NavLink :href="route('drinks.index')" :active="route().current('drinks.index') || route().current('drinks.edit') ||  route().current('drinks.create')">
+                                    Drinks
+                                </NavLink>
                             </div>
                         </div>
 
@@ -121,8 +125,12 @@ const access = usePage().props.auth.user.access;
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink v-if="access == 1" :href="route('users.index')" :active="route().current('users') || route().current('register') ||  route().current('users.edit')">
+                        <ResponsiveNavLink v-if="access == 1" :href="route('users.index')" :active="route().current('users.index') || route().current('register') ||  route().current('users.edit')">
                             Users
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink  :href="route('drinks.index')" :active="route().current('drinks.index') || route().current('drinks.edit') ||  route().current('drinks.create')">
+                            Drinks
                         </ResponsiveNavLink>
                         
                     </div>

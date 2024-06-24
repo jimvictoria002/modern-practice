@@ -3,11 +3,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, usePage, useForm } from '@inertiajs/vue3';
 import NavLink from '@/Components/NavLink.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import Pagination from '@/Components/Pagination.vue';
 import Swal from 'sweetalert2';
+import Pagination from '@/Components/Pagination.vue';
 
 defineProps({
-    users: {
+    drinks: {
         type: Object,
         required: true
     }
@@ -18,7 +18,6 @@ const { props } = usePage();
 
 const successMessage = props.flash.success;
 
-
 if (successMessage) {
     Swal.fire({
         icon: 'success',
@@ -28,7 +27,8 @@ if (successMessage) {
     });
 }
 
-const confirmDelete = (user_id) => {
+
+const confirmDelete = (drink_id) => {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -40,17 +40,16 @@ const confirmDelete = (user_id) => {
     }).then((result) => {
         if (result.isConfirmed) {
             // Call the delete method here
-            deleteUser(user_id);
+            deleteUser(drink_id);
         }
     });
 };
 
-
 const deleteForm = useForm({});
 
-const deleteUser = (user_id) => {
+const deleteUser = (drink_id) => {
 
-    deleteForm.delete(route("users.destroy", user_id), {
+    deleteForm.delete(route("drinks.destroy", drink_id), {
         preserveScroll: true,
         onSuccess: () => {
             Swal.fire({
@@ -76,12 +75,12 @@ const deleteUser = (user_id) => {
 
 <template>
 
-    <Head title="Users" />
+    <Head title="Drinks" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex justify-between items-center w-full">
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Users</h2>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Drinks</h2>
                 <!-- <Link :href="route('register')"
                     class="rounded-md px-3  md:pr-10 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white/80 dark:hover:text-white/50 dark:focus-visible:ring-white text-sm md:text-md">
                 Register new user
@@ -92,20 +91,18 @@ const deleteUser = (user_id) => {
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-20">
-                    <div class=" flex flex-col px-6 ">
-                        <div class="flex justify-between w-full pr-2 md:pr-5 my-4 items-start p-3 ">
-                            <div class=" text-gray-900 dark:text-gray-100 ">Users list</div>
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg ">
+                    <div class=" flex flex-col px-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start w-full pr-2 md:pr-5 my-4 p-3">
+                            <div class=" pb-0 text-gray-900 dark:text-gray-100">Drinks list</div>
 
-                            <NavLink :href="route('register')"
-                                over-ride="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ">
-                                Register new user
+                            <NavLink :href="route('drinks.create')"
+                                over-ride="inline-flex items-center self-end px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ">
+                                Add new drink
                             </NavLink>
-                            <!-- <img src="/images/dog-suspicious.png" alt="Logo"> -->
-
                         </div>
 
-                        <div v-if="users.data.length" class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div v-if="drinks.data.length" class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                 <div
                                     class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg relative">
@@ -118,19 +115,15 @@ const deleteUser = (user_id) => {
                                                 </th>
                                                 <th scope="col"
                                                     class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-100 sm:pl-6">
-                                                    Firstname
+                                                    Name
                                                 </th>
                                                 <th scope="col"
                                                     class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-100 sm:pl-6">
-                                                    Middlename
+                                                    Description
                                                 </th>
                                                 <th scope="col"
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100">
-                                                    Lastname
-                                                </th>
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100">
-                                                    Email
+                                                    Price
                                                 </th>
                                                 <th scope="col"
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100">
@@ -140,46 +133,42 @@ const deleteUser = (user_id) => {
                                             </tr>
                                         </thead>
                                         <tbody class=" ">
-                                            <tr v-for="user in users.data" :key="user.id">
+                                            <tr v-for="drink in drinks.data" :key="drink.id">
                                                 <td
                                                     class="whitespace-nowrap bg-gray-900/40 py-4 pl-4 pr-3 text-sm font-medium text-gray-100 sm:pl-6">
-                                                    {{ user.id }}
+                                                    {{ drink.id }}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap bg-gray-900/40 py-4 pl-4 pr-3 text-sm font-medium text-gray-200/90 sm:pl-6">
-                                                    {{ user.firstname }}
+                                                    {{ drink.name }}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
-                                                    {{ user.middlename ? user.middlename : '' }}
+                                                    {{ drink.description }}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
-                                                    {{ user.lastname }}
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
-                                                    {{ user.email }}
+                                                    {{ drink.price }}
                                                 </td>
                                                 <td
                                                     class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
                                                     {{
-                                                        user.created_at_formatted
+                                                        drink.created_at_formatted
                                                     }}
                                                 </td>
 
                                                 <td
                                                     class="relative whitespace-nowrap bg-gray-900/40 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                     <Link :href="route(
-                                                        'users.edit',
-                                                        user.id
+                                                        'drinks.edit',
+                                                        drink.id
                                                     )"
                                                         class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ">
                                                     Edit
                                                     </Link>
                                                     <DangerButton class="ms-3"
                                                         :class="{ 'relative spinner !text-transparent': false }"
-                                                        @click="confirmDelete(user.id)" :key="user">
+                                                        @click="confirmDelete(drink.id)">
                                                         Delete
                                                     </DangerButton>
                                                 </td>
@@ -192,8 +181,7 @@ const deleteUser = (user_id) => {
 
                         <div v-else class="p-6 pb-0 text-gray-900 dark:text-gray-100">No active user</div>
 
-                        <Pagination :data="users" :url="route('users.index')" />
-
+                        <Pagination :data="drinks" :url="route('drinks.index')" />
 
                     </div>
                 </div>
