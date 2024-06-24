@@ -129,6 +129,10 @@ const deleteUser = (drink_id) => {
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100">
                                                     Created At
                                                 </th>
+                                                <th scope="col"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100">
+                                                    Updated At
+                                                </th>
                                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6" />
                                             </tr>
                                         </thead>
@@ -154,6 +158,12 @@ const deleteUser = (drink_id) => {
                                                     class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
                                                     {{
                                                         drink.created_at_formatted
+                                                    }}
+                                                </td>
+                                                <td
+                                                    class="whitespace-nowrap bg-gray-900/40 px-3 py-4 text-sm text-gray-200/90">
+                                                    {{
+                                                        drink.updated_at_formatted
                                                     }}
                                                 </td>
 

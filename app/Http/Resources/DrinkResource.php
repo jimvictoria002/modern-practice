@@ -20,6 +20,7 @@ class DrinkResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'created_at_formatted' => $this->created_at->format('F j, Y | g:i A'),
+            'updated_at_formatted' => $this->updated_at->format('F j, Y | g:i A'),
         ];
     }
 }
